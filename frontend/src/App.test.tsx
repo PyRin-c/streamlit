@@ -185,6 +185,7 @@ describe("App", () => {
 
     wrapper.setState({
       scriptName: "scriptName",
+      hideMainMenu: false, // set main menu to visible for testing
     })
 
     wrapper
@@ -205,6 +206,23 @@ describe("App", () => {
     wrapper.instance().keyHandlers.STOP_RECORDING()
 
     expect(props.screenCast.stopRecording).toBeCalled()
+  })
+
+  it("hides/shows the main menu", () => {
+    const props = getProps()
+    const wrapper = shallow(<App {...props} />)
+
+    wrapper.setState({
+      hideMainMenu: false,
+    })
+
+    expect(wrapper.find(MainMenu).exists()).toBe(true)
+
+    wrapper.setState({
+      hideMainMenu: true,
+    })
+
+    expect(wrapper.find(MainMenu).exists()).toBe(false)
   })
 
   it("shows s4aMenuItems", () => {

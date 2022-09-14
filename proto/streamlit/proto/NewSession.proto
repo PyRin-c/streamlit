@@ -98,6 +98,12 @@ message Config {
   // See config option "ui.hideSidebarNav".
   bool hide_sidebar_nav = 7;
 
+  // See config option "browser.hideMainMenu".
+  bool hide_main_menu = 8;
+
+  // See config option "browser.hideRunningIcon".
+  bool hide_running_icon = 9;
+
   reserved 1;
 }
 

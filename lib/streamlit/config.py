@@ -660,6 +660,49 @@ _create_option(
 
 _create_section("browser", "Configuration of non-UI browser options.")
 
+_create_option(
+    "browser.hideMainMenu",
+    description="""
+        Hides the hamburger menu in the top-right corner.
+        Default: false
+        """,
+    default_val=False,
+    scriptable=True,
+    type_=bool,
+)
+
+_create_option(
+    "browser.hideRunningIcon",
+    description="""
+        Hides the running icon indicator in the top-right corner.
+        Default: false
+        """,
+    default_val=False,
+    scriptable=True,
+    type_=bool,
+)
+
+_create_option(
+    "browser.hideMainMenu",
+    description="""
+        Hides the hamburger menu in the top-right corner.
+        Default: false
+        """,
+    default_val=False,
+    scriptable=True,
+    type_=bool,
+)
+
+_create_option(
+    "browser.hideRunningIcon",
+    description="""
+        Hides the running icon indicator in the top-right corner.
+        Default: false
+        """,
+    default_val=False,
+    scriptable=True,
+    type_=bool,
+)
 
 _create_option(
     "browser.serverAddress",

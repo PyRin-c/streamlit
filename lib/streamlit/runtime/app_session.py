@@ -695,6 +695,8 @@ def _populate_config_msg(msg: Config) -> None:
     msg.allow_run_on_save = config.get_option("server.allowRunOnSave")
     msg.hide_top_bar = config.get_option("ui.hideTopBar")
     msg.hide_sidebar_nav = config.get_option("ui.hideSidebarNav")
+    msg.hide_main_menu = config.get_option("browser.hideMainMenu")
+    msg.hide_running_icon = config.get_option("browser.hideRunningIcon")
 
 
 def _populate_theme_msg(msg: CustomThemeConfig) -> None:

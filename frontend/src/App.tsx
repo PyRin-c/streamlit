@@ -209,6 +209,12 @@ export class App extends PureComponent<Props, State> {
       developerMode: window.location.host.includes("localhost"),
       themeHash: null,
       gitInfo: null,
+      // Set to true here to prevent the main menu (same with running icon)
+      // from appearing for a few milliseconds even though it is actually configured as hidden.
+      // The reason is that the config options are not immediately available to the frontend.
+      // Hiding it as default here is not noticeable to the user if it is configured to be shown.
+      hideMainMenu: true,
+      hideRunningIcon: true,
       formsData: createFormsData(),
       appPages: [],
       currentPageScriptHash: "",
@@ -694,6 +700,8 @@ export class App extends PureComponent<Props, State> {
         allowRunOnSave: config.allowRunOnSave,
         hideTopBar: config.hideTopBar,
         hideSidebarNav: config.hideSidebarNav,
+        hideMainMenu: config.hideMainMenu,
+        hideRunningIcon: config.hideRunningIcon,
         appPages: newSessionProto.appPages,
         currentPageScriptHash: newPageScriptHash,
         latestRunTime: performance.now(),
@@ -1274,6 +1282,8 @@ export class App extends PureComponent<Props, State> {
       gitInfo,
       hideTopBar,
       hideSidebarNav,
+      hideMainMenu,
+      hideRunningIcon,
       currentPageScriptHash,
     } = this.state
 
@@ -1344,29 +1354,31 @@ export class App extends PureComponent<Props, State> {
                   />
                 </>
               )}
-              <MainMenu
-                isServerConnected={this.isServerConnected()}
-                quickRerunCallback={this.rerunScript}
-                clearCacheCallback={this.openClearCacheDialog}
-                settingsCallback={this.settingsCallback}
-                aboutCallback={this.aboutCallback}
-                screencastCallback={this.screencastCallback}
-                screenCastState={this.props.screenCast.currentState}
-                s4aMenuItems={
-                  this.props.s4aCommunication.currentState.menuItems
-                }
-                s4aIsOwner={this.props.s4aCommunication.currentState.isOwner}
-                sendS4AMessage={this.props.s4aCommunication.sendMessage}
-                gitInfo={gitInfo}
-                showDeployError={this.showDeployError}
-                closeDialog={this.closeDialog}
-                isDeployErrorModalOpen={
-                  this.state.dialog?.type === DialogType.DEPLOY_ERROR
-                }
-                loadGitInfo={this.sendLoadGitInfoBackMsg}
-                canDeploy={SessionInfo.isSet() && !SessionInfo.isHello}
-                menuItems={menuItems}
-              />
+              {!hideMainMenu && (
+                <MainMenu
+                  isServerConnected={this.isServerConnected()}
+                  quickRerunCallback={this.rerunScript}
+                  clearCacheCallback={this.openClearCacheDialog}
+                  settingsCallback={this.settingsCallback}
+                  aboutCallback={this.aboutCallback}
+                  screencastCallback={this.screencastCallback}
+                  screenCastState={this.props.screenCast.currentState}
+                  s4aMenuItems={
+                    this.props.s4aCommunication.currentState.menuItems
+                  }
+                  s4aIsOwner={this.props.s4aCommunication.currentState.isOwner}
+                  sendS4AMessage={this.props.s4aCommunication.sendMessage}
+                  gitInfo={gitInfo}
+                  showDeployError={this.showDeployError}
+                  closeDialog={this.closeDialog}
+                  isDeployErrorModalOpen={
+                    this.state.dialog?.type === DialogType.DEPLOY_ERROR
+                  }
+                  loadGitInfo={this.sendLoadGitInfoBackMsg}
+                  canDeploy={SessionInfo.isSet() && !SessionInfo.isHello}
+                  menuItems={menuItems}
+                />
+              )}
             </Header>
 
             <AppView
